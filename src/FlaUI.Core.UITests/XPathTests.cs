@@ -79,7 +79,7 @@ namespace FlaUI.Core.UITests
             {
                 var app = Application.Launch("mspaint.exe");
                 var window = app.GetMainWindow(automation);
-                var button = window.FindFirstByXPath($"//Button[@Name='{GetPaintBrushName()}']");
+                var button = window.FindFirstByXPath($"//Button[@Name='{GetPencilName()}']");
 
                 Assert.That(button, Is.Not.Null);
                 app.Close();
@@ -112,14 +112,14 @@ namespace FlaUI.Core.UITests
             }
         }
 
-        private string GetPaintBrushName()
+        private string GetPencilName()
         {
             switch (OperatingSystem.CurrentCulture.TwoLetterISOLanguageName)
             {
                 case "de":
-                    return "Pinsel";
+                    return "Stift";
                 default:
-                    return "Brushes";
+                    return "Pencil";
             }
         }
 
