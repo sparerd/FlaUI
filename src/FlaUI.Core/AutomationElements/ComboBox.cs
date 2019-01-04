@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using FlaUI.Core.Definitions;
+﻿using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
 using FlaUI.Core.Patterns;
+using System;
+using System.Linq;
+using System.Threading;
 
 namespace FlaUI.Core.AutomationElements
 {
@@ -39,8 +39,9 @@ namespace FlaUI.Core.AutomationElements
             set
             {
                 EditableItem.Text = value;
-                // UIA2/WinForms does not set the selected item until it is expanded
-                if (AutomationType == AutomationType.UIA2 && FrameworkType == FrameworkType.WinForms)
+                // UIA2/WinForms does not set the selected item until it is expanded.
+                // Also include UIA3 to prevent bugs when UIA2 is loaded in the same process
+                if ((AutomationType == AutomationType.UIA2 || AutomationType == AutomationType.UIA3) && FrameworkType == FrameworkType.WinForms)
                 {
                     Expand();
                     Collapse();
