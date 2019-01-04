@@ -1,9 +1,9 @@
-﻿using System;
-using FlaUI.Core.AutomationElements;
+﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
 using FlaUI.Core.UITests.TestFramework;
 using NUnit.Framework;
+using System;
 
 namespace FlaUI.Core.UITests.Elements
 {
@@ -78,7 +78,7 @@ namespace FlaUI.Core.UITests.Elements
         [Test]
         public void EditableTextTest()
         {
-            var combo = _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("EditableCombo")).AsComboBox();
+            var combo = Retry.WhileNull(() => _mainWindow.FindFirstDescendant(cf => cf.ByAutomationId("EditableCombo")).AsComboBox()).Result;
             Assert.That(combo, Is.Not.Null);
             combo.EditableText = "Item 3";
             Assert.That(combo.SelectedItem, Is.Not.Null);
